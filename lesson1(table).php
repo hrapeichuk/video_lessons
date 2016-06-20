@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Таблица</title>
+</head>
+<body>
+<table border="1" cellspacing="0" cellpadding="20" align="center" width="600">
+    <tr>
+        <td colspan="2"><h1 align="middle">Заголовок
+            <a href="http://www.mastergradeit.co.za/files/thumb/152/200" target="_blank"> <img alt="image" align="center" src="http://www.mastergradeit.co.za/files/thumb/152/200"/></a></h1>
+        </td>
+    </tr>
+    <tr>
+        <td width="100" valign="top">
+            <a href="https://www.google.com">Google</a><br/>
+            <a href="https://www.google.com">Google</a><br/>
+            <a href="https://www.google.com">Google</a>
+        </td>
+        <td align="middle"><h3>Галерея изображений</h3>
+            <img src="http://www.mastergradeit.co.za/files/thumb/152/200" />
+            <img src="http://www.mastergradeit.co.za/files/thumb/152/200" />
+            <img src="http://www.mastergradeit.co.za/files/thumb/152/200" />
+            <img src="http://www.mastergradeit.co.za/files/thumb/152/200" />
+        </td>
+    </tr>
+    <tr>
+        <td align="middle" colspan="2">Какой-нибудь текст</td>
+    </tr>
+    <tr>
+</table>
+</body>
+</html>
