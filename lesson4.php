@@ -22,7 +22,10 @@ do{
 } while($i<=10);
 
 echo "<br>";
+for ($i=0; $i<10; print ($i++." "))
+
 $cities = array("Москва", "Питер", "Рязань");
+echo "<br><br>";
 foreach ($cities as $value){
     echo $value." ";
 }
