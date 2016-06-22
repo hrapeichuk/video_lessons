@@ -1,32 +1,14 @@
 <?php
-function Login($username, $remember){
-    if ($username == ''){
-        return false;
-    }
-    $_SESSION['username'] = $username;
-    if ($remember){
-        setcookie('username', $username, time() + 3600 * 24 * 7);
-    }
-    return true;
-}
-
-function Logout()
-{
-    setcookie('username', '', time() - 1);
-    unset($_SESSION['username']);
-}
-
 session_start();
-$enter_site = false;
-
-Logout();
+setcookie('username', '', time() - 1);
+unset($_SESSION['username']);
 
 if (count($_POST) > 0){
-    $enter_site = Login($_POST['username'], $_POST['remember'] == 'on');
-}
-if ($enter_site){
+    $_SESSION['username'] = $_POST['username'];
+    if ($_POST['remember'] == 'on'){
+        setcookie('username', $username, time() + 3600 * 24 * 7);
+    }
     header("Location: a.php");
-    exit();
 }
 ?>
 <html>

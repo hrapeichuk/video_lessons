@@ -8,5 +8,3 @@ else{
     $page = $_SESSION['page'];
     header("Location: $page");
 }
-
-    
