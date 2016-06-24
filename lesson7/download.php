@@ -1,15 +1,39 @@
 <?php
-$path = "big_image/";
-$types = array('image/gif', 'image/png', 'image/jpeg');
+$path_to_big_images = "big_image/";
+$path_to_small_images = "small_image/";
+$types = array('image/gif', 'image/png', 'image/jpeg', 'image/jpg');
 
 if(isset($_POST['download'])) {
-    if (@copy($_FILES['image']['tmp_name'], $path . $_FILES['image']['name'])){
+    if (@copy($_FILES['image']['tmp_name'], $path_to_big_images . $_FILES['image']['name'])){
+
+        $size = getimagesize($path_to_big_images . $_FILES['image']['name']);
+        $image = $path_to_big_images . $_FILES['image']['name'];
+        $new_image = $path_to_small_images . $_FILES['image']['name'];
+        $width = $size[0];
+        $height = $size[1];
+        
+        if($width > $height){
+            $width_min = 200;
+            $scale = $width_min/$width;
+            $height_min = $height * $scale;
+        }
+        else{
+            $height_min = 200;
+            $scale = $height_min/$height;
+            $width_min = $width * $scale;
+        }
+        $thumb = imagecreatetruecolor($width_min, $height_min);
+        $source = imagecreatefromjpeg($image);
+
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $width_min, $height_min, $width, $height);
+        imagejpeg($thumb, $new_image);
+
         header("Location: view.php");
     }
     else{
         echo 'Загрузка изображения не произошла';
     }
-    if (!in_array($_FILES['picture']['type'], $types)){
+    if (!in_array($_FILES['image']['type'], $types)){
         echo "Неверный тип файла";
     }
 }
