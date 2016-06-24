@@ -2,7 +2,7 @@
 include_once ('database.php');
 $result = $connection->query("SELECT * FROM image;");
 
-if (isset($_GET['action']) && $_GET['action'] == 'view' && isset($_GET['id'])) {
+if (isset($_GET['action']) && $_GET['action'] == 'view' && isset($_GET['id'])){
     $id = (int)$_GET['id'];
     header("Location: image.php#id_$id");
 }

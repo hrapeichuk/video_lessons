@@ -2,17 +2,17 @@
 include_once ('database.php');
 $types = array('image/gif', 'image/png', 'image/jpeg', 'image/jpg');
 
-if(isset($_POST['download'])) {
+if(isset($_POST['download'])){
     if (@copy($_FILES['image']['tmp_name'], $path_to_big_images . $_FILES['image']['name'])){
 
         $size = getimagesize($path_to_big_images . $_FILES['image']['name']);
+        $width = $size[0];
+        $height = $size[1];
         $image = $path_to_big_images . $_FILES['image']['name'];
+        $new_image = $path_to_small_images . $_FILES['image']['name'];
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
         $review = 0;
-        $new_image = $path_to_small_images . $_FILES['image']['name'];
-        $width = $size[0];
-        $height = $size[1];
 
         if($width > $height){
             $width_min = 200;
@@ -31,7 +31,7 @@ if(isset($_POST['download'])) {
         imagejpeg($thumb, $new_image);
 
         if ($stmt = $connection->prepare("INSERT INTO image (name, type, review) VALUES (?, ?, ?)")) {
-            $stmt->bind_param('ssi',  $name, $type, $review);
+            $stmt->bind_param('ssi', $name, $type, $review);
             if (!$stmt->execute()) {
                 die('Insert error');
             }
@@ -39,7 +39,7 @@ if(isset($_POST['download'])) {
         header("Location: view.php");
     }
     else{
-        echo 'Загрузка изображения не произошла';
+        echo "Загрузка изображения не произошла";
     }
     if (!in_array($_FILES['image']['type'], $types)){
         echo "Неверный тип файла";
